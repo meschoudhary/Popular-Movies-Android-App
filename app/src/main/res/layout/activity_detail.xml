@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/detail_container">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_gravity="bottom"
+                    android:text="THE REVENENT"
+                    android:id="@+id/textview_title"
+                    android:paddingTop="30dp"
+                    android:paddingBottom="30dp"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/primary_text_default_material_dark"
+                    android:background="@color/material_deep_teal_500"
+                    android:textStyle="bold"
+                    android:layout_weight="0"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="0"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="15dp">
+                    <ImageView
+                        android:layout_width="@dimen/detail_screen_poster_width"
+                        android:layout_height="@dimen/detail_screen_poster_height"
+                        android:id="@+id/imageview_poster"
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:paddingLeft="25dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Release Date"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/release_date_label_font_size"
+                            android:paddingTop="15dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20-06-2015"
+                            android:textSize="@dimen/release_date_font_size"
+                            android:id="@+id/textview_release_date"
+                            android:paddingTop="5dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Vote Average"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/vote_avg_label_font_size"
+                            android:paddingTop="15dp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="8.1/10"
+                            android:paddingTop="5dp"
+                            android:textSize="@dimen/vote_avg_font_size"
+                            android:id="@+id/textview_rating"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Synopsis"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/synopsis_label_font_size"
+                    android:paddingTop="15dp"
+                    android:paddingLeft="20dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PLOT Synonpsis"
+                    android:textStyle="bold"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:id="@+id/textview_plot_synopsis"
+                    android:textAlignment="inherit"
+                    />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>
