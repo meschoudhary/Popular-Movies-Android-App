@@ -340,6 +340,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         backdrop_imageview = (ImageView) getActivity().findViewById(R.id.backdropImg);
         trailer_listView = (ListView) getActivity().findViewById(R.id.list_item_trailer);
         review_listView = (ListView) getActivity().findViewById(R.id.list_item_review);
+        trailer_listView.setFocusable(false);
+        review_listView.setFocusable(false);
+
 
     }
 
