@@ -94,7 +94,12 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         findviewsbyid();
         Cursor c = getActivity().getContentResolver().query(FavoriteMovieProvider.Movies.CONTENT_URI,
                 null, null, null, null);
-        getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
+
+        if (savedInstanceState == null)
+            getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
+        else if (savedInstanceState != null)
+            LoadfromIntent(movie);
+
         super.onActivityCreated(savedInstanceState);
 
     }
@@ -212,6 +217,30 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         return rootView;
 
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // save bundle as parcelable array list to save instance state of movie array object;
+        outState.putParcelable("movie_details", movie);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstancesState) {
+        super.onCreate(savedInstancesState);
+        // if saveinstancestate is not null and movies array object is null
+        // load the saved instance in the movie object
+        if(savedInstancesState != null && movie == null){
+            ///edit
+            movie = savedInstancesState.getParcelable("movie_details");
+        }
+        else {
+            // do nothing;
+        }
+        setHasOptionsMenu(true);
+    }
+
+
 
     public void setplaceholderimages(){
         poster_imageview.setImageResource(R.drawable.test);
