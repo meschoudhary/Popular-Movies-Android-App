@@ -1,11 +1,26 @@
-<GridView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnWidth="@dimen/fragment_main_column_width"
-    android:numColumns="auto_fit"
-    android:stretchMode="columnWidth"
-    tools:context=".PlaceholderFragment"
-    android:id="@+id/poster_grid">
-</GridView>
+    tools:context=".MainActivity$MainActivityFragment">
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <GridView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnWidth="@dimen/fragment_main_column_width"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            tools:context=".ui.PlaceholderFragment"
+            android:id="@+id/poster_grid"
+            android:background="@color/cardview_light_background">
+        </GridView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</FrameLayout>

@@ -3,22 +3,31 @@
     package="udacity.com.parvez.popularmovies">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main_Activity">
+        <activity android:name=".ui.Main_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Setting_activity" />
-        <activity android:name=".Detail_activity"></activity>
+        <activity android:name=".ui.Setting_activity" />
+        <activity android:name=".ui.Detail_activity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <provider android:authorities="udacity.com.parvez.popularmovies.data.FavoriteMovieProvider"
+            android:name=".FavoriteMovieProvider"
+            android:exported="true"
+            android:enabled="true"></provider>
     </application>
+
 
 </manifest>

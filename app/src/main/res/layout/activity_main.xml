@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:name="udacity.com.parvez.popularmovies.ui.PlaceholderFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main_Activity"
-    android:id="@+id/container">
-
-</RelativeLayout>
+    android:id="@+id/placeholder_fragment"
+    tools:layout="@android:layout/list_content">
+</fragment>

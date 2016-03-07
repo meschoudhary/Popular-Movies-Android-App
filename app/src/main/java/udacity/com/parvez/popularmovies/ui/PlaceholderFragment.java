@@ -1,13 +1,16 @@
-package udacity.com.parvez.popularmovies;
+package udacity.com.parvez.popularmovies.ui;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,14 +32,26 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class PlaceholderFragment extends Fragment {
+import udacity.com.parvez.popularmovies.BuildConfig;
+import udacity.com.parvez.popularmovies.R;
+import udacity.com.parvez.popularmovies.data.FavoriteMovieContract;
+import udacity.com.parvez.popularmovies.data.FavoriteMovieProvider;
+import udacity.com.parvez.popularmovies.utils.Movie;
+import udacity.com.parvez.popularmovies.utils.MovieTrailer;
+import udacity.com.parvez.popularmovies.utils.adapters.MoviePosterAdapter;
+import udacity.com.parvez.popularmovies.utils.helper.HelperUtility;
+
+public class PlaceholderFragment extends Fragment implements  LoaderManager.LoaderCallbacks<Cursor> {
     private MoviePosterAdapter posterAdapter;
     private Movie[] movies;
     private ArrayList<Movie> movie_list = new ArrayList<Movie>();
+    private ArrayList<MovieTrailer> movieTrailerArrayList = new ArrayList<MovieTrailer>();
     private String sort_by_saved_state = null;
     private String sort_by_saved_instance_state = null;
+    final String FAVORITE = "favorite";
+    public static final int LOADER_ID_FAVORITE_MOVIES = 101;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     public PlaceholderFragment() {
@@ -75,7 +90,6 @@ public class PlaceholderFragment extends Fragment {
         if (movies != null){
             movie_list.clear();
             for (int i = 0 ; i < movies.length ; i++){
-//                Log.v("LOG_TAG","onSaveInstanceState" + " movies != null and movie_list.add and size = " + movie_list.size());
                 movie_list.add(movies[i]);
             }
         }
@@ -87,29 +101,7 @@ public class PlaceholderFragment extends Fragment {
     }
 
 
-    public void updatePosterGrid(String sort_by_saved_state){
-        // I think i may have overcomplicated this. suggest some better way if possible to do this
-        // Run fetch poster task only if the movies array object is null ie only once since
-        // activity is launched
-        // If sort_by_saved_state is not null and and the saved instance of sort by order is not equal
-        // to the sort by saved state then fetch the data from api
 
-        if (movies == null || (sort_by_saved_state != null
-                && sort_by_saved_instance_state != sort_by_saved_state)){
-
-            FetchPostersTask fetchPostersTask = new FetchPostersTask();
-            // get shared prefs
-            fetchPostersTask.execute(sort_by_saved_state);
-        }
-        // else movies object is not null ie its is restored by savedInstanceState load that;
-        else{
-            posterAdapter.clear();
-            for(Movie movie : movies){
-                posterAdapter.add(movie);
-            }
-        }
-
-    }
 
 
     @Override
@@ -124,12 +116,95 @@ public class PlaceholderFragment extends Fragment {
         updatePosterGrid(sort_by_saved_state);
     }
 
+    public void updatePosterGrid(String sort_by_saved_state){
+        if (movies == null || (sort_by_saved_state != null
+                && sort_by_saved_instance_state != sort_by_saved_state)){
+
+            FetchPostersTask fetchPostersTask = new FetchPostersTask();
+            // get shared prefs
+
+            if (sort_by_saved_state.equals(FAVORITE)) {
+                getLoaderManager().restartLoader(LOADER_ID_FAVORITE_MOVIES, null,this);
+            }
+            else {
+                fetchPostersTask.execute(sort_by_saved_state);
+            }
+        }
+        // else movies object is not null ie its is restored by savedInstanceState load that;
+        else{
+            posterAdapter.clear();
+            for(Movie movie : movies){
+                posterAdapter.add(movie);
+            }
+        }
+
+
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(getActivity(), FavoriteMovieProvider.Movies.CONTENT_URI, null, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        swipeRefreshLayout.setRefreshing(false);
+        if(cursor.getCount()!=0) {
+            movies = new Movie[cursor.getCount()];
+            cursor.moveToFirst();
+            for (int i = 0; i < cursor.getCount(); i++) {
+                movies[i] = new Movie();
+                movies[i].setTitle(cursor.getString(cursor.getColumnIndex(FavoriteMovieContract.TITLE)));
+                movies[i].setVote_average(cursor.getString(cursor.getColumnIndex(FavoriteMovieContract.VOTE_AVERAGE)));
+                movies[i].setRelease_date(cursor.getString(cursor.getColumnIndex(FavoriteMovieContract.RELEASE_DATE)));
+                movies[i].setPoster_path(cursor.getString(cursor.getColumnIndex(FavoriteMovieContract.POSTER_PATH)));
+                movies[i].setPlot_synopsis(cursor.getString(cursor.getColumnIndex(FavoriteMovieContract.PLOT_SYNOPSIS)));
+                movies[i].setId(cursor.getString(cursor.getColumnIndex(FavoriteMovieContract.MOVIE_ID)));
+                movies[i].setBackdrop_path(cursor.getString(cursor.getColumnIndex(FavoriteMovieContract.BACKDROP_IMAGE)));
+                cursor.moveToNext();
+            }
+        }
+        else
+            posterAdapter.clear();
+        cursor.close();
+
+        if (movies != null) {
+            posterAdapter.clear();
+            for(Movie movie : movies){
+                posterAdapter.add(movie);
+            }
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        posterAdapter.clear();
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         posterAdapter = new MoviePosterAdapter(getActivity(), new ArrayList<Movie>());
+
+        // swipe to refresh grid view
+        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.main_swipe_refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (HelperUtility.hasNetworkConnection(getActivity())) {
+                    movies = null;
+                    posterAdapter.clear();
+                    updatePosterGrid(HelperUtility.getPreferredSorting(getActivity()));
+                    //Log.v(LOG_TAG, "refreshed");
+                } else {
+                    Toast.makeText(getActivity(), "Network Not Available!", Toast.LENGTH_SHORT).show();
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            }
+        });
+
 
         // setting grid view adaptor
 
@@ -143,10 +218,8 @@ public class PlaceholderFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent sendIntent = new Intent(getActivity(), Detail_activity.class);
-                // Parcelable object
-                sendIntent.putExtra("data", movies[position]);
-                startActivity(sendIntent);
+                ((Callback) getActivity())
+                        .onItemSelected(movies[position]);
             }
         });
 
@@ -158,9 +231,9 @@ public class PlaceholderFragment extends Fragment {
 
         private final String LOG_TAG = FetchPostersTask.class.getSimpleName();
 
+
         @Override
         protected Movie[] doInBackground(String ... params) {
-
             if (params.length == 0)
                 return null;
             HttpURLConnection urlConnection = null;
@@ -168,7 +241,6 @@ public class PlaceholderFragment extends Fragment {
 
             // Will contain the raw JSON response as a string.
             String posterJsonStr = null;
-            String api_key = "#API_KEY";
 
             try {
                 final String MOVIE_DB_BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
@@ -179,10 +251,12 @@ public class PlaceholderFragment extends Fragment {
 
                 Uri buildUri = Uri.parse(MOVIE_DB_BASE_URL).buildUpon()
                         .appendQueryParameter(SORTBY_PARAM, params[0])
-                        .appendQueryParameter(API_KEY, api_key)
+                        .appendQueryParameter(API_KEY, BuildConfig.MOVIE_DB_API_KEY)
                         .build();
 
+
                 URL url = new URL(buildUri.toString());
+                Log.v("URL",url.toString());
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
@@ -245,6 +319,8 @@ public class PlaceholderFragment extends Fragment {
             final String TITLE = "title";
             final String VOTE_AVERAGE = "vote_average";
             final String RELEASE_DATE = "release_date";
+            final String BACKDROP_PATH = "backdrop_path";
+
 
             JSONObject forecastJson = new JSONObject(posterJsonStr);
             JSONArray movie_list = forecastJson.getJSONArray(RESULTS);
@@ -260,12 +336,12 @@ public class PlaceholderFragment extends Fragment {
                 movies[i].setPlot_synopsis(movieObject.getString(OVERVIEW));
                 movies[i].setVote_average(movieObject.getString(VOTE_AVERAGE));
                 movies[i].setRelease_date(movieObject.getString(RELEASE_DATE));
+                movies[i].setBackdrop_path(movieObject.getString(BACKDROP_PATH));
             }
 
             return movies;
 
         }
-
 
         @Override
         protected void onPostExecute(Movie[] movies) {
@@ -275,8 +351,24 @@ public class PlaceholderFragment extends Fragment {
                 for(Movie movie : movies){
                     posterAdapter.add(movie);
                 }
+                swipeRefreshLayout.setRefreshing(false);
+
             }
         }
+    }
+
+    void onSortingChanged() {
+        String sorting = HelperUtility.getPreferredSorting(getActivity());
+        updatePosterGrid(sorting);
+    }
+
+    public interface Callback {
+        /**
+         * DetailFragmentCallback for when an item has been selected.
+         *
+         * @param movie
+         */
+        void onItemSelected(Movie movie);
     }
 
 }

@@ -3,24 +3,51 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
     <!--Fragment sceen dimen-->
     <dimen name="fragment_main_column_width">150dp</dimen>
+
     <!--Poster Grid Dimen-->
     <dimen name="grid_poster_width">185dp</dimen>
     <dimen name="grid_poster_height">277dp</dimen>
 
     <!--Detail screen dimen-->
+    <dimen name="detail_screen_title_font_size">20sp</dimen>
+
+    <!--backdrop image height-->
+    <dimen name="detail_screen_backdrop_height">299dp</dimen>
+
     <!--Detail Screen poster dimen-->
-    <dimen name="detail_screen_poster_width">150dp</dimen>
+    <dimen name="detail_screen_poster_width">155dp</dimen>
     <dimen name="detail_screen_poster_height">200dp</dimen>
+
     <!--release date field -->
-    <dimen name="release_date_label_font_size">20sp</dimen>
-    <dimen name="release_date_font_size">15sp</dimen>
+    <dimen name="release_date_label_font_size">15sp</dimen>
+    <dimen name="release_date_font_size">12sp</dimen>
+
     <!--average vote -->
-    <dimen name="vote_avg_label_font_size">20sp</dimen>
-    <dimen name="vote_avg_font_size">15sp</dimen>
+    <dimen name="vote_avg_label_font_size">15sp</dimen>
+    <dimen name="vote_avg_font_size">12sp</dimen>
+
     <!--synopsis-->
     <dimen name="synopsis_label_font_size">20sp</dimen>
 
+    <!--margin-->
+    <dimen name="left_margin">20dp</dimen>
+    
+    <!--padding-->
+    <dimen name="default_padding">15dp</dimen>
+    <dimen name="footer_padding">20dp</dimen>
+
+    <!--floating button-->
+    <dimen name="floating_button_width">50dp</dimen>
+    <dimen name="floating_button_height">50dp</dimen>
+
+
+    <!--review-->
+    <dimen name="review_author_name_font">17sp</dimen>
+
+    <!--trailer-->
+    <dimen name="trailer_card_height">150dp</dimen>
 
 </resources>

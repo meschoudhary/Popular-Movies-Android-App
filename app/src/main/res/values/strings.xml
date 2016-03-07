@@ -19,4 +19,14 @@
     <string name="pref_sort_by_highest_rated" translatable="false">vote_count.desc</string>
     <string name="title_activity_detail_activity">detail_activity</string>
 
+
+    <string name="pref_sort_label_favorite" >Favorite</string>
+    <string name="pref_sort_by_favorite" translatable="false">favorite</string>
+
+    <!-- intent share string-->
+    <string name="share_links">Sharing Movie Details</string>
+
+
+
+
 </resources>

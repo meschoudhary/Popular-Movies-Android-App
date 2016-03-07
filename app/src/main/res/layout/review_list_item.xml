@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_speaker"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardBackgroundColor="#FFFFFF"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="4dp"
+    card_view:cardUseCompatPadding="true">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/list_item_review"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:gravity="center_vertical"
+        android:paddingLeft="35dp"
+        android:paddingRight="@dimen/footer_padding"
+        android:paddingBottom="@dimen/footer_padding">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_item_review_author_textbox"
+            android:text="Author_name_Placeholder"
+            android:textStyle="bold"
+            android:textSize="@dimen/review_author_name_font"
+            android:paddingTop="@dimen/default_padding"
+            android:textAlignment="gravity"/>
+        <TextView
+            android:paddingTop="@dimen/default_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_item_review_content_textbox"
+            android:text="Content_placeholder"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_item_review_url_textbox"
+            android:text="http://urlplaceholder.com"
+            android:autoLink="web"
+            android:paddingTop="@dimen/default_padding"
+            android:paddingBottom="50dp"/>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

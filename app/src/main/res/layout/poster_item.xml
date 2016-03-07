@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <ImageView
-        android:layout_width="@dimen/grid_poster_width"
-        android:layout_height="@dimen/grid_poster_height"
-        android:id="@+id/poster_image"/>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_speaker"
+    android:layout_width="match_parent"
+    android:layout_height="330dp"
+    android:layout_gravity="center"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardBackgroundColor="#FFFFFF"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="4dp"
+    card_view:cardUseCompatPadding="true">
 
-</FrameLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="278dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="1dp"
+        android:id="@+id/poster_image"
+        android:src="@drawable/test"/>
+
+    <TextView
+        android:id="@+id/title_card_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="7dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:text="Interstellar"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/release_date_card_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginLeft="10dp"
+        android:text="2015"/>
+
+    <ImageView
+        android:id="@+id/fav_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="7dp"
+        android:src="@drawable/ic_star_bookmark" />
+    <TextView
+        android:id="@+id/vote_card_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="3dp"
+        android:paddingTop="16dp"
+        android:text="7.4/10"
+        />
+
+
+</android.support.v7.widget.CardView>
