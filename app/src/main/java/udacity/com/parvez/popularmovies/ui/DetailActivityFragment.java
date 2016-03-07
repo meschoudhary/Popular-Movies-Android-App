@@ -415,7 +415,6 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
                     }
                 }
 
-                Log.v(LOG_TAG, TrailerJsonStr);
                 try {
                     return getTrailerDataFromJson(TrailerJsonStr);
                 } catch (JSONException e) {

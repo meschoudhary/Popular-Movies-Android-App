@@ -12,10 +12,10 @@
     <dimen name="grid_poster_height">277dp</dimen>
 
     <!--Detail screen dimen-->
-    <dimen name="detail_screen_title_font_size">20sp</dimen>
+    <dimen name="detail_screen_title_font_size">25sp</dimen>
 
     <!--backdrop image height-->
-    <dimen name="detail_screen_backdrop_height">299dp</dimen>
+    <dimen name="detail_screen_backdrop_height">215dp</dimen>
 
     <!--Detail Screen poster dimen-->
     <dimen name="detail_screen_poster_width">155dp</dimen>

@@ -20,36 +20,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:id="@+id/textview_title"
-                    android:paddingTop="40dp"
-                    android:paddingLeft="20dp"
-                    android:textColor="@color/primary_text_default_material_dark"
-                    android:background="@color/material_blue_grey_800"
-                    android:textStyle="bold"
-                    android:layout_weight="0"
-                    android:textSize="@dimen/detail_screen_title_font_size"
-                    />
+
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="335dp"
-                    android:background="@color/material_blue_grey_800">                    >
+                    android:layout_height="340dp"
+                    android:background="@color/material_blue_grey_800">
 
-                    <ImageView
-                        android:id="@+id/backdropImg"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/detail_screen_backdrop_height"
-                        />
-
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/backdropImg"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
                     <ImageView
                         android:id="@+id/imageview_poster"
                         android:layout_width="@dimen/detail_screen_poster_width"
                         android:layout_height="@dimen/detail_screen_poster_height"
                         android:layout_marginLeft="@dimen/left_margin"
-                        android:layout_marginTop="120dp"
+                        android:layout_marginTop="130dp"
                         />
 
                     <android.support.design.widget.FloatingActionButton
@@ -58,7 +48,7 @@
                         android:layout_height="@dimen/floating_button_height"
                         android:layout_gravity="bottom|right"
                         android:layout_marginRight="120dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="30dp"
                         android:clickable="true"
                         android:src="@drawable/ic_star_border_bookmark"
                         android:visibility="gone"
@@ -70,7 +60,7 @@
                         android:layout_height="@dimen/floating_button_height"
                         android:layout_gravity="bottom|right"
                         android:layout_marginRight="120dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="30dp"
                         android:clickable="true"
                         android:src="@drawable/ic_star_bookmark"
                         android:visibility="gone"
@@ -81,16 +71,29 @@
                         android:layout_width="@dimen/floating_button_width"
                         android:layout_height="@dimen/floating_button_height"
                         android:layout_gravity="bottom|right"
-                        android:layout_marginBottom="20dp"
                         android:layout_marginRight="40dp"
+                        android:layout_marginBottom="30dp"
                         android:clickable="true"
                         android:src="@drawable/share"
                         android:visibility="visible"
                         app:backgroundTint="@color/colorPrimary"
                         app:layout_anchorGravity="bottom|right|end" />
-
-
                 </FrameLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:id="@+id/textview_title"
+                    android:paddingLeft="@dimen/default_padding"
+                    android:paddingBottom="30dp"
+                    android:paddingTop="20dp"
+                    android:textColor="@color/primary_text_default_material_dark"
+                    android:background="@color/material_blue_grey_800"
+                    android:textStyle="bold"
+                    android:layout_weight="0"
+                    android:textSize="@dimen/detail_screen_title_font_size"
+                    />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
