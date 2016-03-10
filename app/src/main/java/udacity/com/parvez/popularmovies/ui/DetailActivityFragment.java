@@ -209,11 +209,14 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         if (arguments != null) {
              movie = (Movie)arguments.getParcelable("data");
         }
-        if(arguments == null )
+        if(arguments == null ) {
             rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-        else
+
+        }
+        else {
             rootView = inflater.inflate(R.layout.activity_detail, container, false);
 
+        }
         return rootView;
 
     }
@@ -340,8 +343,13 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         backdrop_imageview = (ImageView) getActivity().findViewById(R.id.backdropImg);
         trailer_listView = (ListView) getActivity().findViewById(R.id.list_item_trailer);
         review_listView = (ListView) getActivity().findViewById(R.id.list_item_review);
-        trailer_listView.setFocusable(false);
-        review_listView.setFocusable(false);
+
+        if(movie != null)
+        {
+            trailer_listView.setFocusable(false);
+            review_listView.setFocusable(false);
+
+        }
 
 
     }
