@@ -33,7 +33,7 @@
                             android:id="@+id/backdropImg"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:src="@drawable/backdroptest"/>
+                            />
                     </LinearLayout>
                     <ImageView
                         android:id="@+id/imageview_poster"
@@ -41,7 +41,6 @@
                         android:layout_height="@dimen/detail_screen_poster_height"
                         android:layout_marginLeft="@dimen/left_margin"
                         android:layout_marginTop="130dp"
-                        android:src="@drawable/test"
                         />
 
                     <android.support.design.widget.FloatingActionButton
